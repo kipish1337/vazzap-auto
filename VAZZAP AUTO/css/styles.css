@@ -1,0 +1,374 @@
+/* Общие стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: monospace;
+    line-height: 1.6;
+    color: #333;
+}
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Шапка */
+.header {
+    background: #000000;
+    color: rgb(212, 59, 59);
+    padding: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+/* Логотип */
+.header .logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.header .logo img {
+    width: 340px;
+    height: auto;
+    mask: radial-gradient(circle, white 70%, transparent 70%);
+    -webkit-mask: radial-gradient(circle, white 70%, transparent 70%);
+    background-color: transparent;
+}
+
+.header .logo .tagline h1 {
+    font-size: 1.5rem;
+    margin: 0;
+    font-family: blippo, fantasy;
+    letter-spacing: 6px;
+}
+.header .logo .tagline p {
+    font-size: 0.8rem;
+    color: #f4f4f4;
+    margin: 0;
+}
+
+
+/* Кнопка бургер-меню */
+.menu-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+    display: block;
+}
+.wheel-icon {
+    width: 55px;
+    height: 55px;
+    background: url('https://avatars.mds.yandex.net/i?id=695eac2eda06d601a14bcf9b5cfac052b68b2cd0-10148308-images-thumbs&n=13') no-repeat center/cover;
+    background-color: transparent;
+    border-radius: 100%;
+    animation: spin 1s linear infinite;
+}
+
+/* Анимация вращения */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Фоновое затемнение */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    transition: opacity 0.3s ease;
+}
+.overlay.active {
+    display: block;
+}
+
+/* Бургер-меню */
+.burger-menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    transition: left 0.3s ease;
+}
+.burger-menu.active {
+    left: 0;
+}
+.burger-menu .menu-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 100px;
+    text-align: center;
+}
+.burger-menu .menu-list li {
+    margin-bottom: 1.5rem;
+}
+.burger-menu .menu-list li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+.burger-menu .menu-list li a:hover {
+    color: #ff6f61;
+}
+
+/* Герой */
+.hero {
+    background: url('images/hero-bg.jpg') no-repeat center center/cover;
+    color: white;
+    text-align: center;
+    padding: 4rem 0;
+}
+.hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+.hero .btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: #ff6f61;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* Преимущества */
+.features {
+    padding: 2rem 0;
+    text-align: center;
+    
+}
+.features h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+.feature-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+}
+.feature-item {
+    background: #383838;
+    color: #f4f4f4;
+    padding: 1.5rem;
+    border-radius: 5px;
+    transition: transform 0.3s ease;
+}
+.feature-item p {
+    color: #fffb05;
+}
+.feature-item:hover {
+    transform: translateY(-10px);
+}
+.feature-item img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 1rem;
+}
+.feature-item h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+.feature-item p {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Контакты */
+.contacts-preview {
+    background: #f4f4f4;
+    padding: 2rem 0;
+    text-align: center;
+}
+.contacts-preview h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+.contacts-preview ul {
+    list-style: none;
+    padding: 0;
+}
+.contacts-preview ul li {
+    margin-bottom: 0.5rem;
+}
+.contacts-preview ul li a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+
+/* Подвал */
+.footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+/* Раздел "ДО и ПОСЛЕ" */
+.before-after {
+    padding: 3rem 0;
+    text-align: center;
+    background: #413f3f;
+}
+.before-after h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+.before-after p {
+    font-size: 1rem;
+    color: #f5f4f4;
+    margin-bottom: 2rem;
+}
+.image-comparison {
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+.image-item {
+    width: 45%;
+    text-align: center;
+    color: rgb(226, 210, 180);
+    font-size: 20px;
+}
+.image-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    object-fit: cover;
+    aspect-ratio: 16 / 9;
+}
+.image-item img:hover {
+    transform: scale(1.05);
+}
+.image-item p {
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    color: #fffefe;
+}
+@media (max-width: 768px) {
+    .image-item {
+        width: 100%;
+    }
+}
+.container-before-after h2 {
+    color: #f4f4f4;
+}
+.features .feature-list .feature-item p {
+    color: #f5cbcb;
+}
+
+/* Карусель */
+.carousel-section {
+    padding: 3rem 0;
+    text-align: center;
+    background: #413f3f;
+}
+.carousel-section .container h2{
+    color: #f4f4f4;
+}
+.carousel-section h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+.carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+.carousel-info {
+    flex: 1.5; /* Уменьшаем ширину текстовых блоков */
+    text-align: left;
+    color: #333;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 2rem; /* Добавляем отступы слева и справа */
+}
+.carousel-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+.carousel-info p,
+.carousel-info ul {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+.carousel-info ul {
+    list-style: none;
+    padding: 0;
+}
+.carousel-info ul li {
+    margin-bottom: 0.5rem;
+}
+.carousel-info .btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: #ff6f61;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+.carousel-info .btn:hover {
+    background: #e55d50;
+}
+.carousel {
+    flex: 3; /* Увеличиваем ширину карусели */
+    position: relative;
+    max-width: 800px; /* Увеличиваем максимальную ширину */
+    margin: 0 auto;
+    overflow: hidden;
+}
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+.carousel-item {
+    min-width: 100%;
+    box-sizing: border-box;
+}
+.carousel-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    object-fit: cover;
+    aspect-ratio: 16 / 9;
+}

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Автозапчасти для ВАЗ</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Шапка -->
+    <header class="header">
+        <div class="container">
+            <!-- Логотип и слоган -->
+            <div class="logo">
+                <img src="images/logo.jpg" alt="Логотип Автозапчасти для ВАЗ">
+                <div class="tagline">
+                    <h1>Автозапчасти для ВАЗ</h1>
+                    <p>Надежность и качество для вашего автомобиля</p>
+                </div>
+            </div>
+            
+    
+            <!-- Кнопка бургер-меню в виде колеса -->
+            <button class="menu-toggle" aria-label="Открыть меню">
+                <div class="wheel-icon"></div>
+            </button>
+    
+            <!-- Бургер-меню -->
+            <nav class="burger-menu">
+                <ul class="menu-list">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="catalog.html">Каталог</a></li>
+                    <li><a href="cart.html">Корзина</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Фоновое затемнение -->
+    <div class="overlay"></div>
+
+    <!-- Раздел "ДО и ПОСЛЕ" -->
+    <section class="before-after">
+        <div class="container-before-after">
+            <h2>Как мы преобразили автомобиль</h2>
+            <p>Как новые запчасти изменили внешний вид автомобиля.</p>
+            <div class="image-comparison">
+                <div class="image-item">
+                    <img src="images/before.png" alt="ДО">
+                    <p>ДО: Автомобиль до ремонта</p>
+                </div>
+                <div class="image-item">
+                    <img src="images/after.png" alt="ПОСЛЕ">
+                    <p>ПОСЛЕ: Автомобиль после установки новых запчастей</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Карусель изображений -->
+<section class="carousel-section">
+    <div class="container">
+        <h2>Машины, которые мы прокачали</h2>
+        <div class="carousel-container">
+            <!-- Информация слева -->
+            <div class="carousel-info left-info">
+                <h3 id="car-title">Описание автомобиля</h3>
+                <p id="car-description">Этот автомобиль был полностью модернизирован с использованием запчастей премиум-класса.</p>
+                <a href="#" class="btn">Подробнее</a>
+            </div>
+
+            <!-- Карусель -->
+            <div class="carousel">
+                <div class="carousel-track">
+                    <div class="carousel-item" data-title="ВАЗ-2114" 
+                         data-description="Этот автомобиль был полностью модернизирован с использованием запчастей премиум-класса. Установлены новые тормозные диски, подвеска и двигатель."
+                         data-specs="Двигатель: 1.6L Turbo | Мощность: 156 л.с. | Тормозная система: Brembo | Подвеска: KW Coilovers">
+                        <img src="images/car1.png" alt="ВАЗ-2114">
+                    </div>
+                    <div class="carousel-item" data-title="ВАЗ-2110 и ВАЗ-2115" 
+                         data-description="Эти автомобили получили спортивную настройку двигателя и аэродинамический обвес."
+                         data-specs="Двигатель: 1.6L | Мощность: 124 л.с. | Тормозная система: AP Racing | Подвеска: H&R">
+                        <img src="images/car2.png" alt="ВАЗ-2110 и ВАЗ-2115">
+                    </div>
+                    <div class="carousel-item" data-title="ВАЗ-2107" 
+                         data-description="Классический ВАЗ с современной электроникой и улучшенной подвеской."
+                         data-specs="Двигатель: 1.8L | Мощность: 120 л.с. | Тормозная система: Stock | Подвеска: Sachs">
+                        <img src="images/car3.png" alt="ВАЗ-2107">
+                    </div>
+                    <div class="carousel-item" data-title="Lada Priora" 
+                         data-description="Полностью реставрированный автомобиль с новым интерьером и экстерьером."
+                         data-specs="Двигатель: 1.6L | Мощность: 98 л.с. | Тормозная система: Stock | Подвеска: Stock">
+                        <img src="images/car4.png" alt="Lada Priora">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Информация справа -->
+            <div class="carousel-info right-info">
+                <h3>Технические характеристики</h3>
+                <ul id="car-specs">
+                    <li>Двигатель: 1.6L Turbo</li>
+                    <li>Мощность: 150 л.с.</li>
+                    <li>Тормозная система: Brembo</li>
+                    <li>Подвеска: KW Coilovers</li>
+                </ul>
+                <a href="#" class="btn">Связаться</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Герой (основной блок) -->
+    <section class="hero">
+        <div class="container">
+            <h2>Запчасти для вашего автомобиля</h2>
+            <p>Широкий выбор качественных запчастей для всех моделей ВАЗ.</p>
+        </div>
+    </section>
+
+    <!-- Преимущества -->
+    <section class="features">
+        <div class="container">
+            <h2>Почему выбирают нас?</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <img src="https://avatars.mds.yandex.net/i?id=215d374a9ba72b51fb37a5fd2782821f1d938967-5222119-images-thumbs&n=13" alt="Качество">
+                    <h3>Высокое качество</h3>
+                    <p>Только проверенные запчасти от надежных производителей.</p>
+                </div>
+                <div class="feature-item">
+                    <img src="https://avatars.mds.yandex.net/i?id=c8723be61166cc298f1ca0b251649e659851092a-5221702-images-thumbs&n=13" alt="Доставка">
+                    <h3>Быстрая доставка</h3>
+                    <p>Доставляем заказы по всей России в кратчайшие сроки.</p>
+                </div>
+                <div class="feature-item">
+                    <img src="https://avatars.mds.yandex.net/i?id=6e9886f2a388b0ad6d08d8af2b714c046e0de816-5371416-images-thumbs&n=13" alt="Поддержка">
+                    <h3>Поддержка 24/7</h3>
+                    <p>Наши специалисты всегда готовы помочь вам.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section class="contacts-preview">
+        <div class="container">
+            <h2>Свяжитесь с нами</h2>
+            <p>Если у вас есть вопросы, звоните или пишите нам:</p>
+            <ul>
+                <li>Телефон: <a href="tel:+79991234567">+7 (951) 128-48-11</a></li>
+                <li>Email: <a href="mailto:info@vazzapchasti.ru">info@vazzapchasti.ru</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Автозапчасти для ВАЗ. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

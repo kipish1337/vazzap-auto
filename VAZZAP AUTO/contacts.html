@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты - Автозапчасти для ВАЗ</title>
+    <link rel="stylesheet" href="css/styles-contacts.css">
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=e19606d9-1ed2-4d4a-ba5f-8d7fe2e9701f&lang=ru_RU" type="text/javascript"></script>
+</head>
+<body>
+    
+    <header class="header">
+        <div class="container">
+            
+            <div class="site-title">
+                <h1>Автозапчасти для ВАЗ</h1>
+                <p>Надежность и качество для вашего автомобиля</p>
+            </div>
+
+            
+            <button class="menu-toggle" aria-label="Открыть меню">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            
+            <nav class="burger-menu">
+                <ul class="menu-list">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="catalog.html">Каталог</a></li>
+                    <li><a href="cart.html">Корзина</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    
+    <div class="overlay"></div>
+
+    
+    <section class="contacts-section">
+        <div class="container">
+            <h2>Свяжитесь с нами</h2>
+            <p>Мы всегда рады помочь вам с выбором запчастей для вашего автомобиля.</p>
+
+            
+            <div class="contact-info">
+                <div class="info-item">
+                    <img src="https://avatars.mds.yandex.net/i?id=6e9886f2a388b0ad6d08d8af2b714c046e0de816-5371416-images-thumbs&n=13" alt="Телефон">
+                    <div>
+                        <h3>Телефон</h3>
+                        <p><a href="tel:+79991234567">+7 (951) 128-48-11</a></p>
+                        <p><a href="tel:+79999876543">+7 (951) 128-48-12</a></p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <img src="https://avatars.mds.yandex.net/i?id=215d374a9ba72b51fb37a5fd2782821f1d938967-5222119-images-thumbs&n=13" alt="Почта">
+                    <div>
+                        <h3>Email</h3>
+                        <p><a href="mailto:info@vazzapchasti.ru">info@vazzapchasti.ru</a></p>
+                        <p><a href="mailto:support@vazzapchasti.ru">support@vazzapchasti.ru</a></p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <img src="https://avatars.mds.yandex.net/i?id=c8723be61166cc298f1ca0b251649e659851092a-5221702-images-thumbs&n=13" alt="Адрес">
+                    <div>
+                        <h3>Адрес</h3>
+                        <p>г. Челябинск, ул. Изумрудная, д. 5</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- карта получить апи -->
+<div id="map" class="map-container"></div>
+
+    
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Автозапчасти для ВАЗ. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="js/script-contacts.js"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=e19606d9-1ed2-4d4a-ba5f-8d7fe2e9701f&lang=ru_RU" type="text/javascript"></script>
+</body>
+</html>
