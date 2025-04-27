@@ -7,23 +7,19 @@
     <link rel="stylesheet" href="css/styles-cart.css">
 </head>
 <body>
-    <!-- Шапка -->
     <header class="header">
         <div class="container">
-            <!-- Левая часть: название сайта -->
             <div class="site-title">
                 <h1>Автозапчасти для ВАЗ</h1>
                 <p>Надежность и качество для вашего автомобиля</p>
             </div>
 
-            <!-- Кнопка бургер-меню -->
             <button class="menu-toggle" aria-label="Открыть меню">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
             </button>
 
-            <!-- Бургер-меню -->
             <nav class="burger-menu">
                 <ul class="menu-list">
                     <li><a href="index.html">Главная</a></li>
@@ -35,32 +31,44 @@
         </div>
     </header>
 
-    <!-- Фоновое затемнение -->
     <div class="overlay"></div>
 
-    <!-- Корзина -->
     <section class="cart-section">
         <div class="container">
-            <h2>Корзина</h2>
-
-            <!-- Список товаров в корзине -->
+            <h2>Ваша корзина</h2>
+            
             <div class="cart-container">
+                <div class="cart-header">
+                    <span class="header-product">Товар</span>
+                    <span class="header-price">Цена</span>
+                    <span class="header-quantity">Количество</span>
+                    <span class="header-total">Сумма</span>
+                </div>
+                
                 <div class="cart-items" id="cart-items">
                     <!-- Товары будут добавляться динамически -->
                 </div>
 
-                <!-- Итоговая сумма -->
                 <div class="cart-summary">
-                    <h3>Итого:</h3>
-                    <p>Товаров: <span id="total-items">0</span></p>
-                    <p>Сумма: <span id="total-price">0 ₽</span></p>
-                    <button class="btn" id="checkout-btn">Оформить заказ</button>
+                    <div class="summary-row">
+                        <span>Промежуточный итог:</span>
+                        <span id="subtotal">0 ₽</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Доставка:</span>
+                        <span id="delivery">Бесплатно</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Итого:</span>
+                        <span id="total-price">0 ₽</span>
+                    </div>
+                    <button class="btn checkout-btn" id="checkout-btn">Оформить заказ</button>
+                    <a href="catalog.html" class="continue-btn">Продолжить покупки</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Подвал -->
     <footer class="footer">
         <div class="container">
             <p>&copy; 2025 Автозапчасти для ВАЗ. Все права защищены.</p>

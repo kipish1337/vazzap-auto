@@ -1,99 +1,170 @@
-// Получаем элементы DOM
-const cartItems = document.getElementById('cart-items');
-const totalItems = document.getElementById('total-items');
-const totalPrice = document.getElementById('total-price');
-
-// Исходные данные корзины (можно сохранять в localStorage)
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-// Функция для отображения товаров в корзине
-function renderCart() {
-    cartItems.innerHTML = ''; // Очищаем текущий список
-
-    let total = 0;
-
-    cart.forEach(item => {
-        const card = document.createElement('div');
-        card.classList.add('cart-item');
-        card.innerHTML = `
-            <img src="${item.image}" alt="${item.name}">
-            <div class="cart-info">
-                <h3>${item.name}</h3>
-                <p class="price">${item.price} ₽</p>
-                <button class="btn remove-btn" data-id="${item.id}">Удалить</button>
-            </div>
-        `;
-        cartItems.appendChild(card);
-
-        total += item.price;
-    });
-
-    // Обновляем итоговую сумму
-    totalItems.textContent = cart.length;
-    totalPrice.textContent = `${total} ₽`;
-
-    // Добавляем обработчики для кнопок "Удалить"
-    document.querySelectorAll('.remove-btn').forEach(button => {
-        button.addEventListener('click', () => {
-            const id = parseInt(button.dataset.id); // Получаем ID товара
-            removeFromCart(id); // Удаляем товар из корзины
+document.addEventListener('DOMContentLoaded', () => {
+    // Элементы DOM
+    const cartItems = document.getElementById('cart-items');
+    const subtotalEl = document.getElementById('subtotal');
+    const totalPriceEl = document.getElementById('total-price');
+    const checkoutBtn = document.getElementById('checkout-btn');
+    
+    // Загрузка корзины из localStorage
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+    // Отображение корзины
+    function renderCart() {
+        cartItems.innerHTML = '';
+        
+        if (cart.length === 0) {
+            cartItems.innerHTML = '<div class="empty-cart">Ваша корзина пуста</div>';
+            subtotalEl.textContent = '0 ₽';
+            totalPriceEl.textContent = '0 ₽';
+            return;
+        }
+        
+        let subtotal = 0;
+        
+        cart.forEach(item => {
+            const itemTotal = item.price * item.quantity;
+            subtotal += itemTotal;
+            
+            const cartItem = document.createElement('div');
+            cartItem.className = 'cart-item';
+            cartItem.innerHTML = `
+                <div class="product-info">
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="product-details">
+                        <h3>${item.name}</h3>
+                        <button class="remove-btn" data-id="${item.id}">Удалить</button>
+                    </div>
+                </div>
+                <div class="price">${item.price.toLocaleString()} ₽</div>
+                <div class="quantity-control">
+                    <button class="decrement" data-id="${item.id}">-</button>
+                    <input type="number" value="${item.quantity}" min="1" data-id="${item.id}">
+                    <button class="increment" data-id="${item.id}">+</button>
+                </div>
+                <div class="total-price">${itemTotal.toLocaleString()} ₽</div>
+            `;
+            
+            cartItems.appendChild(cartItem);
         });
+        
+        subtotalEl.textContent = `${subtotal.toLocaleString()} ₽`;
+        totalPriceEl.textContent = `${subtotal.toLocaleString()} ₽`;
+        
+        // Добавляем обработчики событий
+        addEventListeners();
+    }
+    
+    // Добавление обработчиков событий
+    function addEventListeners() {
+        document.querySelectorAll('.remove-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const id = parseInt(e.target.dataset.id);
+                removeFromCart(id);
+            });
+        });
+        
+        document.querySelectorAll('.decrement').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const id = parseInt(e.target.dataset.id);
+                updateQuantity(id, -1);
+            });
+        });
+        
+        document.querySelectorAll('.increment').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const id = parseInt(e.target.dataset.id);
+                updateQuantity(id, 1);
+            });
+        });
+        
+        document.querySelectorAll('.quantity-control input').forEach(input => {
+            input.addEventListener('change', (e) => {
+                const id = parseInt(e.target.dataset.id);
+                const newQuantity = parseInt(e.target.value);
+                
+                if (newQuantity > 0) {
+                    updateQuantity(id, 0, newQuantity);
+                } else {
+                    e.target.value = 1;
+                }
+            });
+        });
+    }
+    
+    // Удаление товара из корзины
+    function removeFromCart(id) {
+        if (confirm('Вы уверены, что хотите удалить этот товар из корзины?')) {
+            cart = cart.filter(item => item.id !== id);
+            saveCart();
+            renderCart();
+        }
+    }
+    
+    // Обновление количества товара
+    function updateQuantity(id, change, newQuantity = null) {
+        const item = cart.find(item => item.id === id);
+        
+        if (item) {
+            if (newQuantity !== null) {
+                item.quantity = newQuantity;
+            } else {
+                item.quantity += change;
+                
+                if (item.quantity < 1) {
+                    removeFromCart(id);
+                    return;
+                }
+            }
+            
+            saveCart();
+            renderCart();
+        }
+    }
+    
+    
+    function saveCart() {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+    
+    
+    checkoutBtn.addEventListener('click', () => {
+        if (cart.length === 0) {
+            alert('Ваша корзина пуста!');
+            return;
+        }
+        
+        if (confirm('Подтвердить оформление заказа?')) {
+            alert('Заказ успешно оформлен! Спасибо за покупку.');
+            cart = [];
+            saveCart();
+            renderCart();
+        }
     });
-}
-
-// Функция для удаления товара из корзины
-function removeFromCart(id) {
-    cart = cart.filter(item => item.id !== id); // Удаляем товар по ID
-    localStorage.setItem('cart', JSON.stringify(cart)); // Сохраняем изменения в localStorage
-    renderCart(); // Перерисовываем корзину
-}
-
-// Кнопка "Оформить заказ"
-const checkoutBtn = document.getElementById('checkout-btn');
-checkoutBtn.addEventListener('click', () => {
-    if (cart.length === 0) {
-        alert('Корзина пуста. Добавьте товары для оформления заказа.');
-    } else {
-        alert('Заказ оформлен! Спасибо за покупку.');
-        cart = []; // Очищаем корзину
-        localStorage.removeItem('cart'); // Удаляем данные из localStorage
-        renderCart(); // Обновляем интерфейс
-    }
-});
-
-// Бургер-меню
-const menuToggle = document.querySelector('.menu-toggle');
-const burgerMenu = document.querySelector('.burger-menu');
-const overlay = document.querySelector('.overlay');
-
-// Переключение бургер-меню
-menuToggle.addEventListener('click', () => {
-    menuToggle.classList.toggle('active');
-    burgerMenu.classList.toggle('active');
-    overlay.classList.toggle('active');
-
-    // Добавляем эффект размытия фона
-    if (burgerMenu.classList.contains('active')) {
-        document.body.style.overflow = 'hidden'; // Запрещаем прокрутку
-        document.body.style.filter = 'blur(0px)';
-    } else {
-        document.body.style.overflow = ''; // Возвращаем прокрутку
-        document.body.style.filter = '';
-    }
-});
-
-// Закрытие меню при клике на затемнение
-overlay.addEventListener('click', () => {
-    menuToggle.classList.remove('active');
-    burgerMenu.classList.remove('active');
-    overlay.classList.remove('active');
-
-    // Убираем эффект размытия фона
-    document.body.style.overflow = '';
-    document.body.style.filter = '';
-});
-
-// Инициализация при загрузке страницы
-window.addEventListener('load', () => {
-    renderCart(); // Отображаем текущие товары в корзине
+    
+    // Инициализация
+    renderCart();
+    
+    // Бургер-меню (оставляем предыдущую реализацию)
+    const menuToggle = document.querySelector('.menu-toggle');
+    const burgerMenu = document.querySelector('.burger-menu');
+    const overlay = document.querySelector('.overlay');
+    
+    menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        burgerMenu.classList.toggle('active');
+        overlay.classList.toggle('active');
+        
+        if (burgerMenu.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+    });
+    
+    overlay.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        burgerMenu.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    });
 });

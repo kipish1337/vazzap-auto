@@ -25,17 +25,17 @@ const carSpecs = document.getElementById('car-specs');
 let currentIndex = 0;
 
 function updateCarousel() {
-    const offset = -currentIndex * 100; // Сдвигаем на ширину одного слайда
+    const offset = -currentIndex * 100; 
     carouselTrack.style.transform = `translateX(${offset}%)`;
 
-    // Обновляем информацию о машине
+    
     const currentCar = carouselItems[currentIndex];
     carTitle.textContent = currentCar.dataset.title;
     carDescription.textContent = currentCar.dataset.description;
 
-    // Обновляем технические характеристики
+    
     const specs = currentCar.dataset.specs.split(' | ');
-    carSpecs.innerHTML = ''; // Очищаем предыдущие характеристики
+    carSpecs.innerHTML = ''; 
     specs.forEach(spec => {
         const li = document.createElement('li');
         li.textContent = spec;
@@ -46,7 +46,7 @@ function updateCarousel() {
 function nextSlide() {
     currentIndex++;
     if (currentIndex >= carouselItems.length) {
-        currentIndex = 0; // Зацикливаем
+        currentIndex = 0; 
     }
     updateCarousel();
 }
@@ -56,3 +56,4 @@ setInterval(nextSlide, 5000); // 5000 мс = 5 секунд
 
 // Инициализация карусели при загрузке страницы
 updateCarousel();
+

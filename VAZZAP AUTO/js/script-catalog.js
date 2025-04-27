@@ -38,8 +38,8 @@ const products = [
 ];
 
 // Настройки пагинации
-const itemsPerPage = 6; // Количество товаров на странице
-let currentPage = 1; // Текущая страница
+const itemsPerPage = 6;
+let currentPage = 1;
 
 // Функция для отображения товаров
 function renderProducts(filteredProducts) {
@@ -47,21 +47,80 @@ function renderProducts(filteredProducts) {
     const end = currentPage * itemsPerPage;
     const paginatedProducts = filteredProducts.slice(start, end);
 
-    productGrid.innerHTML = ''; // Очищаем текущий список товаров
+    productGrid.innerHTML = '';
 
     paginatedProducts.forEach(product => {
         const card = document.createElement('div');
         card.classList.add('product-card');
         card.innerHTML = `
-            <img src="${product.image}" alt="${product.name}">
+            <img src="${product.image}" alt="${product.name}" loading="lazy">
             <div class="product-info">
                 <h3>${product.name}</h3>
-                <p class="price">${product.price} ₽</p>
-                <a href="#" class="btn">Подробнее</a>
+                <p class="price">${product.price.toLocaleString('ru-RU')} ₽</p>
+                <button class="btn add-to-cart" data-id="${product.id}">В корзину</button>
             </div>
         `;
         productGrid.appendChild(card);
     });
+
+    addCartEventListeners();
+}
+
+// Функция для добавления обработчиков событий кнопок "В корзину"
+function addCartEventListeners() {
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const productId = parseInt(e.target.dataset.id);
+            addToCart(productId);
+            
+            // Анимация кнопки
+            e.target.textContent = '✓ Добавлено';
+            e.target.style.backgroundColor = '#4CAF50';
+            setTimeout(() => {
+                e.target.textContent = 'В корзину';
+                e.target.style.backgroundColor = '#ff6f61';
+            }, 2000);
+            
+            // Показываем уведомление
+            showNotification('Товар добавлен в корзину');
+        });
+    });
+}
+
+// Функция добавления товара в корзину
+function addToCart(productId) {
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existingItem = cart.find(item => item.id === productId);
+    
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            image: product.image,
+            quantity: 1
+        });
+    }
+    
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+// Функция показа уведомления
+function showNotification(message) {
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.classList.add('fade-out');
+        setTimeout(() => notification.remove(), 500);
+    }, 3000);
 }
 
 // Функция для обновления пагинации
@@ -119,34 +178,21 @@ window.addEventListener('load', () => {
 filtersForm.addEventListener('change', filterAndRenderProducts);
 searchInput.addEventListener('input', filterAndRenderProducts);
 
-// Бургер-меню
+// Бургер-меню (оставляем для полноты)
 const menuToggle = document.querySelector('.menu-toggle');
 const burgerMenu = document.querySelector('.burger-menu');
 const overlay = document.querySelector('.overlay');
 
-// Переключение бургер-меню
 menuToggle.addEventListener('click', () => {
     menuToggle.classList.toggle('active');
     burgerMenu.classList.toggle('active');
     overlay.classList.toggle('active');
-
-    // Добавляем эффект размытия фона
-    if (burgerMenu.classList.contains('active')) {
-        document.body.style.overflow = 'hidden'; // Запрещаем прокрутку
-        document.body.style.filter = 'blur(0px)';
-    } else {
-        document.body.style.overflow = ''; // Возвращаем прокрутку
-        document.body.style.filter = '';
-    }
+    document.body.style.overflow = burgerMenu.classList.contains('active') ? 'hidden' : '';
 });
 
-// Закрытие меню при клике на затемнение
 overlay.addEventListener('click', () => {
     menuToggle.classList.remove('active');
     burgerMenu.classList.remove('active');
     overlay.classList.remove('active');
-
-    // Убираем эффект размытия фона
     document.body.style.overflow = '';
-    document.body.style.filter = '';
 });
